@@ -440,12 +440,13 @@ void CCLayer::ccTouchCancelled(CCTouch *pTouch, CCEvent *pEvent)
     CC_UNUSED_PARAM(pEvent);
 }    
 
-void CCLayer::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
+bool  CCLayer::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
 {
     if (kScriptTypeNone != m_eScriptType)
     {
-        excuteScriptTouchHandler(CCTOUCHBEGAN, pTouches);
-        return;
+ //       excuteScriptTouchHandler(CCTOUCHBEGAN, pTouches);
+//        return;
+          return excuteScriptTouchHandler(CCTOUCHBEGAN, pTouches) == 0 ? false : true;
     }
 
     CC_UNUSED_PARAM(pTouches);

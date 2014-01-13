@@ -188,10 +188,13 @@ void CCActionManager::addAction(CCAction *pAction, CCNode *pTarget, bool paused)
 
      actionAllocWithHashElement(pElement);
  
-     CCAssert(! ccArrayContainsObject(pElement->actions, pAction), "");
-     ccArrayAppendObject(pElement->actions, pAction);
+     //CCAssert(! ccArrayContainsObject(pElement->actions, pAction), "");
+    if (ccArrayContainsObject(pElement->actions, pAction)){
+        return;
+    }
+    ccArrayAppendObject(pElement->actions, pAction);
  
-     pAction->startWithTarget(pTarget);
+    pAction->startWithTarget(pTarget);
 }
 
 // remove

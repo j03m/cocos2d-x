@@ -246,7 +246,7 @@ void CCNode::setRotationY(float fRotationY)
 /// scale getter
 float CCNode::getScale(void)
 {
-    CCAssert( m_fScaleX == m_fScaleY, "CCNode#scale. ScaleX != ScaleY. Don't know which one to return");
+    //CCAssert( m_fScaleX == m_fScaleY, "CCNode#scale. ScaleX != ScaleY. Don't know which one to return");
     return m_fScaleX;
 }
 
@@ -267,7 +267,7 @@ void CCNode::setScale(float fScaleX,float fScaleY)
 
 /// scaleX getter
 float CCNode::getScaleX()
-{
+{  
     return m_fScaleX;
 }
 
