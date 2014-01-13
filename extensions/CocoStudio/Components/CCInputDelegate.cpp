@@ -65,7 +65,7 @@ void CCInputDelegate::ccTouchCancelled(CCTouch *pTouch, CCEvent *pEvent)
     CC_UNUSED_PARAM(pEvent);
 }    
 
-void CCInputDelegate::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
+bool CCInputDelegate::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
 {
     CC_UNUSED_PARAM(pTouches);
     CC_UNUSED_PARAM(pEvent);

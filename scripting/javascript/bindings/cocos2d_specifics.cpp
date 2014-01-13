@@ -109,10 +109,17 @@ void JSTouchDelegate::ccTouchCancelled(CCTouch *pTouch, CCEvent *pEvent) {
 }
 
 // optional
-void JSTouchDelegate::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent) {
+bool JSTouchDelegate::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent) {
     CC_UNUSED_PARAM(pEvent);
-    ScriptingCore::getInstance()->executeCustomTouchesEvent(CCTOUCHBEGAN, 
-        pTouches, _mObj);
+    jsval retval;
+    bool bRet = false;
+    ScriptingCore::getInstance()->executeCustomTouchesEvent(CCTOUCHBEGAN, pTouches, _mObj, retval);
+    if(JSVAL_IS_BOOLEAN(retval)) {
+        bRet = JSVAL_TO_BOOLEAN(retval);
+    }
+    
+    return bRet;
+
 }
 
 void JSTouchDelegate::ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent) {
@@ -638,7 +645,14 @@ JSBool js_cocos2dx_JSTouchDelegate_registerStandardDelegate(JSContext *cx, uint3
             touch->registerStandardDelegate(JSVAL_TO_INT(argv[1]));
         else
             touch->registerStandardDelegate(0);
-        jsobj = (argc == 1 ? JSVAL_TO_OBJECT(argv[0]) : JSVAL_TO_OBJECT(JSVAL_VOID));
+        
+        //if (argc == 1){
+            jsobj = JSVAL_TO_OBJECT(argv[0]);
+//        }else{
+//            jsobj = JSVAL_TO_OBJECT(JSVAL_VOID);
+//        }
+        
+//        jsobj = (argc == 1 ? JSVAL_TO_OBJECT(argv[0]) : JSVAL_TO_OBJECT(JSVAL_VOID));
         touch->setJSObject(jsobj);
         JSTouchDelegate::setDelegateForJSObject(jsobj, touch);
 		return JS_TRUE;

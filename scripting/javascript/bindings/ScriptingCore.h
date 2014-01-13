@@ -152,8 +152,13 @@ public:
                                 CCTouch *pTouch, JSObject *obj, jsval &retval);
     int executeCustomTouchEvent(int eventType,
                                 CCTouch *pTouch, JSObject *obj);
+
     int executeCustomTouchesEvent(int eventType,
                                   CCSet *pTouches, JSObject *obj);
+    
+    int executeCustomTouchesEvent(int eventType,
+                              CCSet *pTouches, JSObject *obj,
+                                  jsval &retval);
 	/**
 	 * @return the global context
 	 */

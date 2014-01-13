@@ -950,6 +950,39 @@ int ScriptingCore::executeLayerKeypadEvent(CCLayer* pLayer, int eventType)
 }
 
 
+
+int ScriptingCore::executeCustomTouchesEvent(int eventType,
+                                            CCSet *pTouches, JSObject *obj,
+                                            jsval &retval)
+{
+    
+    std::string funcName;
+    getTouchesFuncName(eventType, funcName);
+    
+    JSObject *jsretArr = JS_NewArrayObject(this->cx_, 0, NULL);
+    JS_AddNamedObjectRoot(this->cx_, &jsretArr, "touchArray");
+    int count = 0;
+    for(CCSetIterator it = pTouches->begin(); it != pTouches->end(); ++it, ++count) {
+        jsval jsret;
+        getJSTouchObject(this->cx_, (CCTouch *) *it, jsret);
+        if(!JS_SetElement(this->cx_, jsretArr, count, &jsret)) {
+            break;
+        }
+    }
+    
+    jsval jsretArrVal = OBJECT_TO_JSVAL(jsretArr);
+    executeFunctionWithOwner(OBJECT_TO_JSVAL(obj), funcName.c_str(), 1, &jsretArrVal, &retval);
+    JS_RemoveObjectRoot(this->cx_, &jsretArr);
+    
+    for(CCSetIterator it = pTouches->begin(); it != pTouches->end(); ++it, ++count) {
+        jsval jsret;
+        removeJSTouchObject(this->cx_, (CCTouch *) *it, jsret);
+    }
+    
+    return 1;
+}
+
+
 int ScriptingCore::executeCustomTouchesEvent(int eventType,
                                        CCSet *pTouches, JSObject *obj)
 {
@@ -1017,6 +1050,9 @@ int ScriptingCore::executeCustomTouchEvent(int eventType,
     return 1;
 
 }
+
+
+
 
 #pragma mark - Conversion Routines
 JSBool jsval_to_int32( JSContext *cx, jsval vp, int32_t *outval )

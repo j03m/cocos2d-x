@@ -209,7 +209,7 @@ public:
     void ccTouchCancelled(CCTouch *pTouch, CCEvent *pEvent);
     
     // optional
-    void ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent);
+    bool ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent);
     void ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent);
     void ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent);
     void ccTouchesCancelled(CCSet *pTouches, CCEvent *pEvent);
