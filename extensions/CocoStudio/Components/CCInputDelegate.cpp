@@ -71,13 +71,13 @@ bool CCInputDelegate::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
     CC_UNUSED_PARAM(pEvent);
 }
 
-void CCInputDelegate::ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent)
+bool CCInputDelegate::ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent)
 {
     CC_UNUSED_PARAM(pTouches);
     CC_UNUSED_PARAM(pEvent);
 }
 
-void CCInputDelegate::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
+bool CCInputDelegate::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
 {
     CC_UNUSED_PARAM(pTouches);
     CC_UNUSED_PARAM(pEvent);

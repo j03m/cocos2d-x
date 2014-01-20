@@ -122,15 +122,31 @@ bool JSTouchDelegate::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent) {
 
 }
 
-void JSTouchDelegate::ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent) {
+bool JSTouchDelegate::ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent) {
     CC_UNUSED_PARAM(pEvent);
-    ScriptingCore::getInstance()->executeCustomTouchesEvent(CCTOUCHMOVED, 
-        pTouches, _mObj);        
+    jsval retval;
+    bool bRet = false;
+
+    ScriptingCore::getInstance()->executeCustomTouchesEvent(CCTOUCHMOVED,
+        pTouches, _mObj, retval);
+    if(JSVAL_IS_BOOLEAN(retval)) {
+        bRet = JSVAL_TO_BOOLEAN(retval);
+    }
+    
+    return bRet;
+
 }
-void JSTouchDelegate::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent) {
+bool JSTouchDelegate::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent) {
     CC_UNUSED_PARAM(pEvent);
-    ScriptingCore::getInstance()->executeCustomTouchesEvent(CCTOUCHENDED, 
-        pTouches, _mObj);
+    jsval retval;
+    bool bRet = false;
+    ScriptingCore::getInstance()->executeCustomTouchesEvent(CCTOUCHENDED,
+        pTouches, _mObj, retval);
+    if(JSVAL_IS_BOOLEAN(retval)) {
+        bRet = JSVAL_TO_BOOLEAN(retval);
+    }
+    return bRet;
+
 }
 void JSTouchDelegate::ccTouchesCancelled(CCSet *pTouches, CCEvent *pEvent) {
     CC_UNUSED_PARAM(pEvent);

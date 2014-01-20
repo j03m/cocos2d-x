@@ -46,8 +46,8 @@ public:
     virtual void ccTouchCancelled(CCTouch *pTouch, CCEvent *pEvent);
 
     virtual bool ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent);
-    virtual void ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent);
-    virtual void ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent);
+    virtual bool ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent);
+    virtual bool ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent);
     virtual void ccTouchesCancelled(CCSet *pTouches, CCEvent *pEvent);
     
     virtual void didAccelerate(CCAcceleration* pAccelerationValue);

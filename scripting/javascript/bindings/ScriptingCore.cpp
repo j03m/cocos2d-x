@@ -589,10 +589,12 @@ void ScriptingCore::cleanup()
 
 void ScriptingCore::reportError(JSContext *cx, const char *message, JSErrorReport *report)
 {
-    js_log("%s:%u:%s\n",
+    js_log("%s:%u:%u:%s\n",
             report->filename ? report->filename : "<no filename=\"filename\">",
-            (unsigned int) report->lineno,
+            (unsigned int) report->lineno, (unsigned int) report->column,
             message);
+    
+    //todo: j03m - send this up the wire to loggly
 };
 
 

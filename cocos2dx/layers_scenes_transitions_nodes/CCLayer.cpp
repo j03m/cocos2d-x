@@ -453,24 +453,24 @@ bool  CCLayer::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
     CC_UNUSED_PARAM(pEvent);
 }
 
-void CCLayer::ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent)
+bool CCLayer::ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent)
 {
     if (kScriptTypeNone != m_eScriptType)
     {
-        excuteScriptTouchHandler(CCTOUCHMOVED, pTouches);
-        return;
+        return excuteScriptTouchHandler(CCTOUCHMOVED, pTouches)== 0 ? false : true ;
+        //return;
     }
 
     CC_UNUSED_PARAM(pTouches);
     CC_UNUSED_PARAM(pEvent);
 }
 
-void CCLayer::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
+bool CCLayer::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
 {
     if (kScriptTypeNone != m_eScriptType)
     {
-        excuteScriptTouchHandler(CCTOUCHENDED, pTouches);
-        return;
+        return excuteScriptTouchHandler(CCTOUCHENDED, pTouches)== 0 ? false : true;
+        //return;
     }
 
     CC_UNUSED_PARAM(pTouches);

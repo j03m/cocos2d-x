@@ -210,8 +210,8 @@ public:
     
     // optional
     bool ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent);
-    void ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent);
-    void ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent);
+    bool ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent);
+    bool ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent);
     void ccTouchesCancelled(CCSet *pTouches, CCEvent *pEvent);
 
 private:
